@@ -42,10 +42,10 @@ jobs:
 
           echo "::set-output name=container::${container_name}"
           echo "::set-output name=flavors::${flavors_json}"
-  vib-verify:
+  vib-publish:
     runs-on: ubuntu-latest
     needs: get-container
-    name: Verify
+    name: Publish
     strategy:
       fail-fast: false
       matrix:
@@ -58,7 +58,7 @@ jobs:
       - uses: vmware-labs/vmware-image-builder-action@main
         name: Verify ${{ needs.get-container.outputs.container }}
         with:
-          pipeline: vib-scheduled-verify.json
+          pipeline: vib-scheduled-publish.json
         env:
           # Path with docker resources
           VIB_ENV_PATH:  ${{ matrix.flavor.path }}
