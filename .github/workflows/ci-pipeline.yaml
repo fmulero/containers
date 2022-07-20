@@ -51,7 +51,7 @@ jobs:
               echo "${readme_object}"
               echo "$(echo ${readme_object} | jq -r '.patch')"
               echo "$(echo ${readme_object} | jq -r '.patch' | grep -o "\`latest\` ([^)]*)"  | sort -u)"
-              branch="$(echo ${readme_object} | jq -r '.patch' | grep -o "\`latest\` ([^)]*)"  | sort -u | sed -nr 's|\`latest\` \((.+)/Dockerfile\)|\1|p')"
+              branch="$(echo ${readme_object} | jq -r '.patch' | grep -o "\`latest\` ([^)]*)"  | sort -u | sed -nr "s|\`latest\` \((.+)/Dockerfile\)|\1|p")"
               echo "::set-output name=result::ok"
               echo "::set-output name=container::${container_name}"
               echo "::set-output name=path::bitnami/${container_name}/${branch}"
