@@ -42,19 +42,21 @@ jobs:
             echo "::set-output name=path::${flavors[0]}"
           elif [[ "${#flavors[@]}" -le "0" ]]; then
             # Changes done in the containers/ folder but not inside a container subfolder -> Look for readme changes
-            readme_object="$(echo $files_changed_data | jq -r '[ .[] | select(.filename | test("bitnami/[^/]*/README.md"))] | first')"
+            readme_object="$(echo $files_changed_data | jq -r '[ .[] | select(.filename | test("bitnami/[^/]+/README.md"))] | first')"
             if [[ "${readme_object}" == "null" ]]; then
               echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
               echo "::set-output name=result::skip"
             else
-              # Look for modified branch in Readme content
-              echo "${readme_object}"
-              echo "$(echo ${readme_object} | jq -r '.patch')"
-              echo "$(echo ${readme_object} | jq -r '.patch' | grep -o "\`latest\` ([^)]*)"  | sort -u)"
+              # Look for the modified branch in Readme content
               branch="$(echo ${readme_object} | jq -r '.patch' | grep -o "\`latest\` ([^)]*)"  | sort -u | sed -nr "s|\`latest\` \((.+)/Dockerfile\)|\1|p")"
-              echo "::set-output name=result::ok"
-              echo "::set-output name=container::${container_name}"
-              echo "::set-output name=path::bitnami/${container_name}/${branch}"
+              if [[ ! -z "${branch}" ]]; then
+                echo "::set-output name=result::ok"
+                echo "::set-output name=container::${container_name}"
+                echo "::set-output name=path::bitnami/${container_name}/${branch}"
+              else
+                echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
+                echo "::set-output name=result::skip"
+              fi
             fi
           else
             # Changes done in more than container -> SKIP
