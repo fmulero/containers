@@ -42,7 +42,7 @@ jobs:
             echo "::set-output name=path::${flavors[0]}"
           elif [[ "${#flavors[@]}" -le "0" ]]; then
             # Changes done in the containers/ folder but not inside a container subfolder -> Look for readme changes
-            local -r readme_object="$(echo $files_changed_data | | jq -r '[ .[] | select(.filename | test("bitnami/[^/]*/README.md"))] | first')"
+            local -r readme_object="$(echo $files_changed_data | jq -r '[ .[] | select(.filename | test("bitnami/[^/]*/README.md"))] | first')"
             if [[ "${readme_object}" == "null" ]]; then
               echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
               echo "::set-output name=result::skip"
