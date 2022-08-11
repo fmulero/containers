@@ -85,5 +85,5 @@ jobs:
           # Path with docker resources
           VIB_ENV_PATH: ${{ matrix.container }}
           # Container name
-          VIB_ENV_CONTAINER: ${{ nsteps.get-container-metadata.outputs.name  }}
+          VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name  }}
           VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
