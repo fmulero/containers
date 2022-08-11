@@ -69,7 +69,7 @@ jobs:
           if [[ -d "${{ matrix.container }}" ]]; then
             name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
             # Build a tag based on current SHA
-            tag="$(echo "${{ matrix.container }}" | awk -F '/' '{printf "%s-rc.%s", $3, "${{ github.event.pull_request.head.sha }}"}')"
+            tag="$(echo "${{ matrix.container }}" | awk -F '/' '{printf "%s-rc.%s", $3, "${GITHUB_RUN_NUMBER}"}')"
             echo "::set-output name=tag::${tag}"
             echo "::set-output name=name::${name}"
             echo "::set-output name=result::ok"
