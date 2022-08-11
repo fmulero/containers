@@ -22,7 +22,7 @@ jobs:
         env:
           GITHUB_COMMITS: ${{ toJson(github.event.commits) }}
         run: |
-          if [[ "${{ github.event.forced }}" == "false" ]] && [[ "${{ github.event.pusher.email }}" == "bitnami-bot@vmware.com" ]]; then
+          if [[ "${{ github.event.forced }}" == "false" ]] && [[ "${{ github.event.pusher.email }}" == "fmulero@vmware.com" ]]; then
             # Get all commits associated to the push
             commits=($(echo "${GITHUB_COMMITS}" | jq -r '.[] | .id'))
             containers=()
