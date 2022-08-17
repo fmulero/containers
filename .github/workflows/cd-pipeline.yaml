@@ -10,11 +10,20 @@ env:
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
   VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
 jobs:
+  log-info:
+    runs-on: ubuntu-latest
+    name: Log events
+    steps:
+      - id: log
+        env:
+          GITHUB_EVENT: ${{ toJson(github.event) }}
+        run: |
+          echo "${GITHUB_EVENT}"
   get-containers:
     runs-on: ubuntu-latest
     name: Get modified containers path
     if: |
-      github.event.pusher.name == 'fmulero' &&
+      github.event.pusher.email == 'fmulero@vmware.com' &&
       github.event.forced == 'false'
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
