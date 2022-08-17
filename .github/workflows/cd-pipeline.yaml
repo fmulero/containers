@@ -15,8 +15,10 @@ jobs:
     name: Log events
     steps:
       - id: log
+        env:
+          GITHUB_EVENT: ${{ toJson(github.event) }}
         run: |
-          echo "${{ toJson(github.event) }}"
+          echo "${GITHUB_EVENT}"
   get-containers:
     runs-on: ubuntu-latest
     name: Get modified containers path
