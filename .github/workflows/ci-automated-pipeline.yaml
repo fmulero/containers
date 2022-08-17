@@ -18,7 +18,7 @@ jobs:
     name: Triage for automated PRs
     if: |
       contains(github.event.pull_request.title, 'Release') &&
-      github.actor == 'fmulero'
+      github.actor == 'bitnami-bot'
     steps:
       # Enables auto-merge and adds necessary labels for automated releases' PRs
       - id: labeling
@@ -119,7 +119,7 @@ jobs:
     name: Reviewal for automated PRs
     if: |
       always() &&
-      github.actor == 'fmulero'
+      github.actor == 'bitnami-bot'
     steps:
       # Approves the CI's PR if the 'VIB Verify' job succeeded
       # Approved by the 'github-actions' user. A PR can't be approved by its author
