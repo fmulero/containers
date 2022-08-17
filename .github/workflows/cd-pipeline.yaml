@@ -24,7 +24,7 @@ jobs:
     name: Get modified containers path
     if: |
       github.event.pusher.email == 'fmulero@vmware.com' &&
-      github.event.forced == 'false'
+      github.event.forced == false
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
       containers: ${{ steps.get-containers.outputs.containers }}
