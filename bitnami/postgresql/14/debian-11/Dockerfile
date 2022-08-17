@@ -7,6 +7,14 @@ ENV HOME="/" \
 ARG EXTRA_LOCALES=""
 ARG WITH_ALL_LOCALES="no"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="14.4.0-debian-11-r24" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgresql" \
+      org.opencontainers.image.title="postgresql" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="14.4.0"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
