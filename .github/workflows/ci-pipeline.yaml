@@ -82,6 +82,7 @@ jobs:
           fi
       - uses: vmware-labs/vmware-image-builder-action@main
         name: Verify
+        if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
           pipeline: vib-verify.json
         env:
