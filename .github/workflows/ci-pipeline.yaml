@@ -91,7 +91,6 @@ jobs:
           VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
   verify-all:
     # Ensure all containers passed the varification
-    if: ${{ always() }}
     runs-on: ubuntu-latest
     name: Verify
     needs: vib-verify
