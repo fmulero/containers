@@ -252,7 +252,7 @@ ensure_apache_configuration_exists() {
             error ""
             error "$(indent "$conf" 4)"
             error ""
-            error "Include the configuration manually and try again."
+            error "Please include the configuration manually and try again."
             return 1
         fi
     fi
