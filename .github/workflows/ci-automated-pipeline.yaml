@@ -139,7 +139,7 @@ jobs:
         with:
           numOfAssignee: 1
           removePreviousAssignees: true
-          teams: build-maintainers
+          teams: fmulero
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Move into In Progress
         uses: peter-evans/create-or-update-project-card@v2
