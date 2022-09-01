@@ -10,6 +10,7 @@ on:
 permissions:
   issues: write
   repository-projects: write
+  pull-requests: write
 
 # To fix the concurrency when for example more than one label is added
 concurrency:
@@ -18,7 +19,6 @@ concurrency:
 
 jobs:
   send_to_solved:
-    if: ${{ github.actor != 'bitnami-bot' }}
     runs-on: ubuntu-latest
     steps:
       - name: Repo checkout
@@ -41,6 +41,6 @@ jobs:
         # Only if moved into Solved
         uses: andymckay/labeler@1.0.4
         with:
-          repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
           add-labels: "solved"
           remove-labels: "in-progress, on-hold, triage"
