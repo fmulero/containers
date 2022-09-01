@@ -44,7 +44,7 @@ jobs:
       #   with:
       #     project-name: Support
       #     # If the author comes from Bitnami, send it to Bitnami. Otherwise, all to Triage
-      #     column-name: ${{ (contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'From Bitnami' || 'Triage' }}
+      #     column-name: ${{ (github.actor == 'bitnami-bot' || (!contains(fromJson(env.BITNAMI_TEAM), github.actor))) && 'Triage' || 'From Bitnami' }}
       #     token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
       #     issue-number: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
       - name: Triage labeling
@@ -52,22 +52,9 @@ jobs:
         uses: andymckay/labeler@1.0.4
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          add-labels: ${{ (!contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'triage' || ((github.actor == 'fmulero') && 'bitnami, automerge' || 'bitnami') }}
+          add-labels: ${{ (github.actor == 'fmulero' || (!contains(fromJson(env.BITNAMI_TEAM), github.actor))) && 'triage' || 'bitnami' }}
           # For reopened issues
           remove-labels: "solved"
-      - name: Enable auto-merge
-        # Only if it is a PR triggered from EAM.
-        if: |
-          github.actor == 'fmulero' && github.event_name != 'issues' &&
-          contains(github.event.pull_request.title, 'Release')
-        run: |
-          curl --request POST \
-          --url https://api.github.com/graphql \
-          --header 'authorization: Bearer ${{ secrets.BITNAMI_BOT_TOKEN }}' \
-          --data '{
-            "query": "mutation { enablePullRequestAutoMerge(input: {pullRequestId: \"${{ github.event.pull_request.node_id }}\", mergeMethod: SQUASH}) { clientMutationId }}"
-            }' \
-          --fail
       - name: Verify labeling
         # Only if it is a PR triggered from EAM.
         # This step triggers CI pipeline
