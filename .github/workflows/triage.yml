@@ -59,7 +59,7 @@ jobs:
         # Only if it is a PR triggered from EAM.
         if: |
           github.actor == 'fmulero' && github.event_name != 'issues' &&
-          contains(github.event.pull_request.title, 'Release') &&
+          contains(github.event.pull_request.title, 'Release')
         run: |
           curl --request POST \
           --url https://api.github.com/graphql \
@@ -73,7 +73,7 @@ jobs:
         # This step triggers CI pipeline
         if: |
           github.actor == 'fmulero' && github.event_name != 'issues' &&
-          contains(github.event.pull_request.title, 'Release') &&
+          contains(github.event.pull_request.title, 'Release')
         uses: andymckay/labeler@1.0.4
         with:
           repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"

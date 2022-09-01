@@ -79,7 +79,7 @@ jobs:
           if [[ -d "${{ matrix.container }}" ]]; then
             name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
             tag=""
-            if [[ "${{ github.actor }}" == "bitnami-bot" ]]; then
+            if [[ "${{ github.actor }}" == "fmulero" ]]; then
               tag="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")"
             else
               # Build a tag based on current RUN number
@@ -112,7 +112,9 @@ jobs:
     # Ensure all containers passed the verification
     runs-on: ubuntu-latest
     name: Verification Summary
-    needs: get-containers, vib-verify
+    needs:
+      - get-containers
+      - vib-verify
     if: ${{ always() }}
     steps:
       - name: Verification Summary
@@ -135,7 +137,7 @@ jobs:
             fi
           fi
       - name: Approval
-        if: ${{ github.actor == 'bitnami-bot' && needs.vib-verify.result == 'success' }}
+        if: ${{ github.actor == 'fmulero' && needs.vib-verify.result == 'success' }}
         run: |
           curl --request POST \
           --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews \
@@ -146,7 +148,7 @@ jobs:
             }' \
           --fail
       - name: Manual review required
-        if: ${{ github.actor == 'bitnami-bot' && needs.vib-verify.result != 'success' }}
+        if: ${{ github.actor == 'fmulero' && needs.vib-verify.result != 'success' }}
         run: |
           curl --request POST \
           --url https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
