@@ -32,13 +32,13 @@ jobs:
         uses: xom9ikk/dotenv@v1.0.2
         with:
           path: .github/workflows/
-      - name: Assign to a person to work on it
-        uses: pozil/auto-assign-issue@v1.9.0
-        with:
-          numOfAssignee: 1
-          removePreviousAssignees: false
-          teams: ${{ env.TRIAGE_TEAM_NAME }}
-          repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
+      # - name: Assign to a person to work on it
+      #   uses: pozil/auto-assign-issue@v1.9.0
+      #   with:
+      #     numOfAssignee: 1
+      #     removePreviousAssignees: false
+      #     teams: ${{ env.TRIAGE_TEAM_NAME }}
+      #     repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
       # - name: Send to the board
       #   uses: peter-evans/create-or-update-project-card@v2
       #   with:
