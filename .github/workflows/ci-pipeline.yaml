@@ -120,7 +120,7 @@ jobs:
       - name: Verification Summary
         run: |
           if [[ "${{ needs.get-containers.result }} != "success" ]]; then
-            echo -e "Verification is required."
+            echo "Verification is required."
             echo " If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make possible the verification."
             exit 1
           else
@@ -128,7 +128,7 @@ jobs:
               echo "It seems these changes don't involve any container"
             else
               if [[ "${{ needs.vib-verify.result }}" != "success" ]]; then
-                echo -e "Verification is required"
+                echo "Verification is required"
                 echo "Please review previous jobs to get more information"
                 exit 1
               else
