@@ -158,7 +158,6 @@ jobs:
     if: |
       always() &&
       github.actor == 'fmulero'
-    needs: verification-summary
     steps:
       - name: Automerge labeling
         uses: andymckay/labeler@1.0.4
