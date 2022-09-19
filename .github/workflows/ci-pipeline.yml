@@ -121,18 +121,20 @@ jobs:
         with:
           script: |
             state = 'success'
+            description = 'Well done! Everything looks good. Please wait for the Bitnami Team review.'
             if ("${{ needs.get-containers.result }}" != "success" ) {
-              core.warning("If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible.")
+              message = "If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible."
+              core.warning(message)
               state = 'pending'
             } else {
               if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
-                core.warning("It seems these changes don't involve any container")
+                message = "It seems these changes don't involve any container"
+                core.warning(message)
               } else {
                 if ("${{ needs.vib-verify.result }}" != "success" ) {
-                  core.error("Please review previous jobs to get more information")
+                  message = "Please review previous jobs to get more information"
+                  core.error(message)
                   state = 'error'
-                } else {
-                  core.notice("Well done! Everything looks good. Please wait for the Bitnami Team review.")
                 }
               }
             }
@@ -143,6 +145,7 @@ jobs:
                 repo: context.payload.repository.name,
                 sha: context.payload.pull_request.head.sha,
                 target_url: `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`,
+                description: description,
                 state: state
               })
               core.info(`Updated build status: ${state}`)
