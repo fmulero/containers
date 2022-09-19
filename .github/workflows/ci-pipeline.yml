@@ -117,7 +117,8 @@ jobs:
       - vib-verify
     if: ${{ always() }}
     steps:
-      - uses: actions/github-script@v6
+      - name: Retrieve Verification Summary
+        uses: actions/github-script@v6
         with:
           script: |
             state = 'success'
