@@ -111,13 +111,13 @@ jobs:
   verification-summary:
     # Ensure all containers passed the verification
     runs-on: ubuntu-latest
+    name: Verification Summary
     needs:
       - get-containers
       - vib-verify
     if: ${{ always() }}
     steps:
-      - name: Verification Summary
-        uses: actions/github-script@v6
+      - uses: actions/github-script@v6
         with:
           script: |
             state = 'success'
@@ -138,11 +138,10 @@ jobs:
             }
             try {
               await github.rest.repos.createCommitStatus({
-                context: `${context.workflow} / Verification Summary`,
+                context: `${context.workflow} / Verification Summary (${context.eventName})`,
                 owner: context.payload.repository.owner.login,
                 repo: context.payload.repository.name,
                 sha: context.payload.pull_request.head.sha,
-                description: 'salchichon',
                 target_url: `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`,
                 state: state
               })
