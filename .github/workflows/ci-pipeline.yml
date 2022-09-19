@@ -130,7 +130,7 @@ jobs:
                   sha: context.payload.pull_request.head.sha
                   state: state
                 })
-                core.info(`Updated build status: ${params.status}`)
+                core.info(`Updated build status: ${state}`)
               } catch (error) {
                 throw new Error(`error while setting context status: ${error.message}`)
               }
