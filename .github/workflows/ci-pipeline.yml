@@ -126,14 +126,14 @@ jobs:
             } else {
               if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
                 core.info("It seems these changes don't involve any container")
-              else
+              } else {
                 if ("${{ needs.vib-verify.result }}" != "success" ) {
                   core.info("Please review previous jobs to get more information")
                   core.notice("Verification is required")
-                else
+                } else {
                   core.info("Well done! Everything looks good. Please wait for the Bitnami Team review.")
-                fi
-              fi
+                }
+              }
             }
   auto-pr-review:
     runs-on: ubuntu-latest
