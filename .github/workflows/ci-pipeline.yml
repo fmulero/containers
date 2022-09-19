@@ -142,7 +142,7 @@ jobs:
                 context: `${context.workflow} / ${context.job} (${context.eventName})`,
                 owner: context.payload.repository.owner.login,
                 repo: context.payload.repository.name,
-                sha: context.payload.pull_request.head.sha
+                sha: context.payload.pull_request.head.sha,
                 state: state
               })
               core.info(`Updated build status: ${state}`)
