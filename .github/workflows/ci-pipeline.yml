@@ -139,12 +139,12 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            core.info(context.payload.event.repository.login)
-            core.info(context.payload.event.repository.name)
+            core.info(context.payload.repository.login)
+            core.info(context.payload.repository.name)
             core.info(context.payload.event.pull_request.head.ref)
             github.repos.createCommitStatus({
-              owner: context.payload.event.repository.login,
-              repo: context.payload.event.repository.name,
+              owner: context.payload.repository.login,
+              repo: context.payload.repository.name,
               sha: context.payload.event.pull_request.head.ref,
               state: 'success'
             });
