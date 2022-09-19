@@ -142,10 +142,10 @@ jobs:
             core.info(context.payload.repository.owner.login)
             core.info(context.payload.repository.name)
             core.info(context.payload.pull_request.head.sha)
-            github.repos.createCommitStatus({
+            github.rest.repos.createCommitStatus({
               owner: context.payload.repository.owner.login,
               repo: context.payload.repository.name,
-              sha: context.payload.pull_request.head.ref,
+              sha: context.payload.pull_request.head.sha,
               state: 'success'
             });
   auto-pr-review:
