@@ -139,7 +139,7 @@ jobs:
             }
             try {
               await github.rest.repos.createCommitStatus({
-                context: `${context.workflow} / ${context.job} (${context.eventName})`,
+                context: `${context.workflow} / Verification Summary (${context.eventName})`,
                 owner: context.payload.repository.owner.login,
                 repo: context.payload.repository.name,
                 sha: context.payload.pull_request.head.sha,
