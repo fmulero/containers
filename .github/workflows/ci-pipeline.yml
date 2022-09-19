@@ -136,7 +136,16 @@ jobs:
               }
             }
       - name: Update commit status
-        uses: ouzi-dev/commit-status-updater@v1.1.0
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.repos.createCommitStatus({
+              context: context.payload,
+              sha: context.payload.event.pull_request.head.ref,
+              owner: context.payload.event.repository.login,
+              repo: context.payload.event.repository.name,
+              state: 'success'
+            });
   auto-pr-review:
     runs-on: ubuntu-latest
     name: Reviewal for automated PRs
