@@ -111,13 +111,12 @@ jobs:
   verification-summary:
     # Ensure all containers passed the verification
     runs-on: ubuntu-latest
-    name: Pepe
     needs:
       - get-containers
       - vib-verify
     if: ${{ always() }}
     steps:
-      - name: Pepe
+      - name: Verification Summary
         uses: actions/github-script@v6
         with:
           script: |
@@ -133,13 +132,13 @@ jobs:
                   core.error("Please review previous jobs to get more information")
                   state = 'error'
                 } else {
-                  core.info("Well done! Everything looks good. Please wait for the Bitnami Team review.")
+                  core.notice("Well done! Everything looks good. Please wait for the Bitnami Team review.")
                 }
               }
             }
             try {
               await github.rest.repos.createCommitStatus({
-                context: `${context.workflow} / Verification Summary (${context.eventName})`,
+                context: `${context.workflow} / Verification Summary`,
                 owner: context.payload.repository.owner.login,
                 repo: context.payload.repository.name,
                 sha: context.payload.pull_request.head.sha,
