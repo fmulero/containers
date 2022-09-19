@@ -135,6 +135,8 @@ jobs:
                 }
               }
             }
+      - name: Update commit status
+        uses: ouzi-dev/commit-status-updater@v1.1.0
   auto-pr-review:
     runs-on: ubuntu-latest
     name: Reviewal for automated PRs
