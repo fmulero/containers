@@ -139,11 +139,13 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            core.info(context.payload.event.repository.login)
+            core.info(context.payload.event.repository.name)
+            core.info(context.payload.event.pull_request.head.ref)
             github.repos.createCommitStatus({
-              context: context.payload,
-              sha: context.payload.event.pull_request.head.ref,
               owner: context.payload.event.repository.login,
               repo: context.payload.event.repository.name,
+              sha: context.payload.event.pull_request.head.ref,
               state: 'success'
             });
   auto-pr-review:
