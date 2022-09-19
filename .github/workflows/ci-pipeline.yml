@@ -135,21 +135,25 @@ jobs:
                 throw new Error(`error while setting context status: ${error.message}`)
               }
             }
-            if ("${{ needs.get-containers.result }}" != "success" ) {
-              core.warning("If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible.")
-              setStatus('pending')
-            } else {
-              if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
-                core.warning("It seems these changes don't involve any container")
+            try {
+              if ("${{ needs.get-containers.result }}" != "success" ) {
+                core.warning("If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible.")
+                await setStatus('pending')
               } else {
-                if ("${{ needs.vib-verify.result }}" != "success" ) {
-                  core.error("Please review previous jobs to get more information")
-                  setStatus('error')
+                if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
+                  core.warning("It seems these changes don't involve any container")
                 } else {
-                  core.info("Well done! Everything looks good. Please wait for the Bitnami Team review.")
-                  setStatus('success')
+                  if ("${{ needs.vib-verify.result }}" != "success" ) {
+                    core.error("Please review previous jobs to get more information")
+                    await setStatus('error')
+                  } else {
+                    core.info("Well done! Everything looks good. Please wait for the Bitnami Team review.")
+                    await setStatus('success')
+                  }
                 }
               }
+            } catch (error) {
+              core.setFailed(error.message)
             }
   auto-pr-review:
     runs-on: ubuntu-latest
