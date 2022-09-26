@@ -8,17 +8,17 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "14ae2f6d8d5f4e3a9e4cf62d5a3da80587a20651a5920dbc4ac89afdaf06f8c0",
+        "digest": "8a1d2ee97e1e6b337254b886f99392ea181cc1708965212e776b205dd61731a2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.9-1"
+        "version": "10.6.10-0"
     },
     "node": {
         "arch": "amd64",
-        "digest": "49946e0443d8f479f296c79589fea205126b6f6faa6b4474e5dd713b36d8167c",
+        "digest": "82532cfe58e59f8b085f6c9e83ec6d51a2abeb1be7240e979f790418c9513d73",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.20.0-3"
+        "version": "14.20.1-0"
     },
     "python": {
         "arch": "amd64",
