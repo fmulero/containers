@@ -37,8 +37,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-11`, `4.0.4`, `4.0.4-debian-11-r7`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/moodle/4/debian-11/Dockerfile)
-* [`3`, `3-debian-11`, `3.11.10`, `3.11.10-debian-11-r7` (3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/moodle/3/debian-11/Dockerfile)
+* [`4`, `4-debian-11`, `4.0.4`, `4.0.4-debian-11-r10`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/moodle/4/debian-11/Dockerfile)
+* [`3`, `3-debian-11`, `3.11.10`, `3.11.10-debian-11-r9` (3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/moodle/3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -225,6 +225,7 @@ Available environment variables:
 - `MOODLE_HOST`: Allows you to configure Moodle's wwwroot feature. Ex: example.com. By default it is a PHP superglobal variable. Default: **$_SERVER['HTTP_HOST']**
 - `MOODLE_REVERSEPROXY`: Allows you to activate the reverseproxy feature of Moodle. Default: **no**
 - `MOODLE_SSLPROXY`: Allows you to activate the sslproxy feature of Moodle. Default: **no**
+- `MOODLE_LANG`: Allows you to set the default site language. Default: **en**
 
 ##### Use an existing database
 
