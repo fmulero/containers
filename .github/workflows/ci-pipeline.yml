@@ -120,35 +120,20 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            state = 'success'
-            description = 'Well done! Everything looks good. Please wait for the Bitnami Team review.'
             if ("${{ needs.get-containers.result }}" != "success" ) {
               description = "If you've just created this PR, don't worry about this message. The Bitnami Team has to review it and make the verification possible."
               core.warning(description)
-              state = 'pending'
+              core.setNeutral(description)
             } else if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
               description = "It seems these changes don't involve any container"
               core.warning(description)
             } else if ("${{ needs.vib-verify.result }}" != "success" ) {
               description = "Please review previous jobs to get more information"
               core.error(description)
-              state = 'error'
-            } else {
-              core.notice(description)
-            }
-            try {
-              await github.rest.repos.createCommitStatus({
-                context: `${context.workflow} / Verification Summary (${context.eventName})`,
-                owner: context.payload.repository.owner.login,
-                repo: context.payload.repository.name,
-                sha: context.payload.pull_request.head.sha,
-                target_url: `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`,
-                description: description,
-                state: state
-              })
-              core.info(`Updated build status: ${state}`)
-            } catch (error) {
               core.setFailed(error.message)
+              core.
+            } else {
+              core.notice('Well done! Everything looks good. Please wait for the Bitnami Team review.')
             }
   auto-pr-review:
     runs-on: ubuntu-latest
