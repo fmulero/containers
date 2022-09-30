@@ -131,7 +131,6 @@ jobs:
               description = "Please review previous jobs to get more information"
               core.error(description)
               core.setFailed(error.message)
-              core.
             } else {
               core.notice('Well done! Everything looks good. Please wait for the Bitnami Team review.')
             }
