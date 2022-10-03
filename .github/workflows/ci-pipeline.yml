@@ -162,7 +162,7 @@ jobs:
     if: |
       always() &&
       contains(github.event.pull_request.labels.*.name, 'auto-merge') &&
-      github.event.pull_request.user.login == 'bitnami-bot'
+      github.event.pull_request.user.login == 'fmulero'
     steps:
       - name: Enable auto-merge feature
         if: ${{ needs.verification-summary.outputs.result == 'success' }}
