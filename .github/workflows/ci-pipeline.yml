@@ -122,6 +122,7 @@ jobs:
         name: Check Status
         uses: actions/github-script@v6
         with:
+          result-encoding: string
           script: |
             state = 'success'
             description = 'Well done! Everything looks good. Please wait for the Bitnami Team review.'
