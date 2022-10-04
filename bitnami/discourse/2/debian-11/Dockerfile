@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.8.8-debian-11-r15" \
+      org.opencontainers.image.ref.name="2.8.9-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/discourse" \
       org.opencontainers.image.title="discourse" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.8.8"
+      org.opencontainers.image.version="2.8.9"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -44,13 +44,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf ruby-2.7.6-153-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf ruby-2.7.6-153-linux-${OS_ARCH}-debian-11.tar.gz ruby-2.7.6-153-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f postgresql-client-14.5.0-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/postgresql-client-14.5.0-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/postgresql-client-14.5.0-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c postgresql-client-14.5.0-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf postgresql-client-14.5.0-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf postgresql-client-14.5.0-1-linux-${OS_ARCH}-debian-11.tar.gz postgresql-client-14.5.0-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f node-14.20.1-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/node-14.20.1-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -76,13 +76,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f discourse-2.8.8-2-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/discourse-2.8.8-2-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/discourse-2.8.8-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f discourse-2.8.9-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/discourse-2.8.9-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/discourse-2.8.9-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c discourse-2.8.8-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf discourse-2.8.8-2-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf discourse-2.8.8-2-linux-${OS_ARCH}-debian-11.tar.gz discourse-2.8.8-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c discourse-2.8.9-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf discourse-2.8.9-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf discourse-2.8.9-0-linux-${OS_ARCH}-debian-11.tar.gz discourse-2.8.9-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -90,7 +90,7 @@ RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
-ENV APP_VERSION="2.8.8" \
+ENV APP_VERSION="2.8.9" \
     BITNAMI_APP_NAME="discourse" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/brotli/bin:$PATH"
 

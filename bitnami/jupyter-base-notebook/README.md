@@ -28,8 +28,9 @@ $ docker run --name jupyter-base-notebook bitnami/jupyter-base-notebook:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.3.1`, `2.3.1-debian-11-r41`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyter-base-notebook/2/debian-11/Dockerfile)
-* [`1`, `1-debian-11`, `1.5.0`, `1.5.0-debian-11-r41` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyter-base-notebook/1/debian-11/Dockerfile)
+* [`3`, `3-debian-11`, `3.0.0`, `3.0.0-debian-11-r2`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyter-base-notebook/3/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.3.1`, `2.3.1-debian-11-r44` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyter-base-notebook/2/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.5.0`, `1.5.0-debian-11-r44` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyter-base-notebook/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -85,6 +86,10 @@ RUN conda install --quiet --yes \
     conda clean --all -f -y
 USER 1001
 ```
+
+## Branch Deprecation Notice
+
+Jupyter Base Notebook's branch 1 and 2 are no longer maintained by upstream and are now internally tagged as to be deprecated. These branches will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 10-28-2022
 
 ## Contributing
 

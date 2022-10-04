@@ -8,17 +8,17 @@
     },
     "jruby": {
         "arch": "amd64",
-        "digest": "f2c0ae0fc8c812556ad1bb93476af01862d5cca43034d4119b4804095a39709a",
+        "digest": "3b86a2083af8b242cbb27e7ba5593410b38d694d9a33b327cd6c316a757b7d37",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.3.8-0-0"
+        "version": "9.3.8-0-1"
     },
     "node": {
         "arch": "amd64",
-        "digest": "49946e0443d8f479f296c79589fea205126b6f6faa6b4474e5dd713b36d8167c",
+        "digest": "82532cfe58e59f8b085f6c9e83ec6d51a2abeb1be7240e979f790418c9513d73",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.20.0-3"
+        "version": "14.20.1-0"
     },
     "python": {
         "arch": "amd64",
