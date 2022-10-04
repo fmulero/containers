@@ -115,7 +115,7 @@ jobs:
       - get-containers
       - vib-verify
     outputs:
-      result: ${{ steps.get-status.outputs.pepe }}
+      result: ${{ steps.get-status.outputs.state }}
     if: ${{ always() }}
     steps:
       - id: get-status
@@ -139,6 +139,7 @@ jobs:
             } else {
               core.notice(description)
             }
+            core.setOutput('state', state)
             try {
               await github.rest.repos.createCommitStatus({
                 context: `${context.workflow} / Verification Summary (${context.eventName})`,
@@ -153,7 +154,6 @@ jobs:
             } catch (error) {
               core.setFailed(error.message)
             }
-            core.setOutput('pepe', state)
   auto-pr-review:
     runs-on: ubuntu-latest
     name: Reviewal for automated PRs
