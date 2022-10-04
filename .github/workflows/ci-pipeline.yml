@@ -115,7 +115,7 @@ jobs:
       - get-containers
       - vib-verify
     outputs:
-      result: ${{ steps.get-status.outputs.result }}
+      result: ${{ steps.get-status.outputs.pepe }}
     if: ${{ always() }}
     steps:
       - id: get-status
@@ -153,7 +153,7 @@ jobs:
             } catch (error) {
               core.setFailed(error.message)
             }
-            core.setOutput('result', state)
+            core.setOutput('pepe', state)
   auto-pr-review:
     runs-on: ubuntu-latest
     name: Reviewal for automated PRs
