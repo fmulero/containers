@@ -78,7 +78,7 @@ jobs:
           if [[ -d "${{ matrix.container }}" ]]; then
             name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
             tag=""
-            if [[ "${{ github.event.pull_request.user.login }}" == "bitnami-bot" ]]; then
+            if [[ "${{ github.event.pull_request.user.login }}" == "fmulero" ]]; then
               tag="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")"
             else
               # Build a tag based on current RUN number
@@ -159,11 +159,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Reviewal for automated PRs
     needs: verification-summary
-    # This job will be executed when the PR was created by bitnami-bot and it has the 'auto-merge' label
+    # This job will be executed when the PR was created by fmulero and it has the 'auto-merge' label
     if: |
       always() &&
       contains(github.event.pull_request.labels.*.name, 'auto-merge') &&
-      github.event.pull_request.user.login == 'bitnami-bot'
+      github.event.pull_request.user.login == 'fmulero'
     steps:
       - name: Enable auto-merge feature
         if: ${{ needs.verification-summary.outputs.result == 'success' }}
