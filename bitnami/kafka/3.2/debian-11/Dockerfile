@@ -13,7 +13,8 @@ LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
       org.opencontainers.image.ref.name="3.2.3-debian-11-r100" \
       org.opencontainers.image.title="kafka" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.2.3"
+      org.opencontainers.image.version="3.2.3" \
+      framu=yes
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
