@@ -70,7 +70,7 @@ jobs:
           PULL_REQUEST_NUMBER: "${{ github.event.pull_request.number }}"
           GITHUB_TOKEN: "${{ github.token }}"
         run: |
-          files_changed_data="$(gh api --paginate /repos/${GITHUB_REPOSITORY}/pulls/${PULL_REQUEST_NUMBER}/files | jq -r '.[] | .filename')"
+          files_changed="$(gh api --paginate /repos/${GITHUB_REPOSITORY}/pulls/${PULL_REQUEST_NUMBER}/files | jq -r '.[] | .filename')"
           # Adding || true to avoid "Process exited with code 1" errors
           flavors=($(echo "$files_changed" | xargs dirname | grep -o "^bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
           assets=($(echo "$files_changed" | xargs dirname | sed -nr "s|bitnami/([^/]*)/.*|\1|p" | sort | uniq || true))
