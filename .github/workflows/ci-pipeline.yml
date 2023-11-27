@@ -8,10 +8,6 @@ on: # rebuild any PRs and main branch changes
       - main
       - bitnami:main
 permissions: {}
-env:
-  CSP_API_URL: https://console.cloud.vmware.com
-  CSP_API_TOKEN: ${{ secrets.CSP_API_TESTING_TOKEN }}
-  VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
 # Avoid concurrency over the same PR
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
@@ -103,6 +99,10 @@ jobs:
     name: VIB Verify
     permissions: 
       contents: read
+    env:
+      CSP_API_URL: https://console.cloud.vmware.com
+      CSP_API_TOKEN: ${{ secrets.CSP_API_TESTING_TOKEN }}
+      VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
     continue-on-error: false
     strategy:
       fail-fast: false
