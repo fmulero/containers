@@ -73,7 +73,7 @@ jobs:
         run: |
           if [[ -n "${DOCKERFILES}" ]]; then
             # Overwrite configuration file to analyze only changed dockerfiles
-            yq -i '. | .header.paths=env($DOCKERFILES)' .licenserc.yaml
+            yq -i '. | .header.paths=env(DOCKERFILES)' .licenserc.yaml
             echo "result=success" >> $GITHUB_OUTPUT
           else
             echo "result=skip" >> $GITHUB_OUTPUT
