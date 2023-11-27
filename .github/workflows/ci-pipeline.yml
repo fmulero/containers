@@ -69,7 +69,7 @@ jobs:
       - id: get-modified-files
         name: 'Get modified files'
         env:
-          DOCKERFILES: "${{ fromJSON(needs.get-containers.outputs.dockerfiles) }}"
+          DOCKERFILES: "${{ needs.get-containers.outputs.dockerfiles }}"
         run: |
           if [[ -n "${DOCKERFILES}" ]]; then
             # Overwrite configuration file to analyze only changed dockerfiles
