@@ -27,12 +27,10 @@ jobs:
       - id: get-modified-files
         name: 'Get modified files'
         env:
-          DIFF_URL: "${{github.event.pull_request.diff_url}}"
-          TEMP_FILE: "${{runner.temp}}/pr-${{github.event.number}}.diff"
+          BASE_SHA: "${{github.event.pull_request.base.sha }}"
+          HEAD_SHA: "${{github.event.pull_request.head.sha }}"
         run: |
-          # This request doesn't consume API calls.
-          curl -Lkso $TEMP_FILE $DIFF_URL
-          files_changed="$(sed -nr 's/[\-\+]{3} [ab]\/(.*)/\1/p' $TEMP_FILE | sort | uniq)"
+          files_changed="$(git diff --name-only $HEAD_SHA $(git merge-base $HEAD_SHA $BASE_SHA) | sort | uniq)"
           dockerfiles=()
           while read -r file_changed; do
             # Avoid removed files
@@ -55,6 +53,8 @@ jobs:
   get-containers:
     runs-on: ubuntu-latest
     name: Get modified containers
+    permissions:
+      pull-requests: read
     if: |
       github.event.pull_request.state != 'closed' &&
       (
@@ -67,12 +67,10 @@ jobs:
       - id: get-containers
         name: Get modified containers
         env:
-          DIFF_URL: "${{github.event.pull_request.diff_url}}"
-          TEMP_FILE: "${{runner.temp}}/pr-${{github.event.number}}.diff"
+          PULL_REQUEST_NUMBER: "${{ github.event.pull_request.number }}"
+          GITHUB_TOKEN: "${{ github.token }}"
         run: |
-          # This request doesn't consume API calls.
-          curl -Lkso $TEMP_FILE $DIFF_URL
-          files_changed="$(sed -nr 's/[\-\+]{3} [ab]\/(.*)/\1/p' $TEMP_FILE | sort | uniq)"
+          files_changed_data="$(gh api --paginate /repos/${GITHUB_REPOSITORY}/pulls/${PULL_REQUEST_NUMBER}/files | jq -r '.[] | .filename')"
           # Adding || true to avoid "Process exited with code 1" errors
           flavors=($(echo "$files_changed" | xargs dirname | grep -o "^bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
           assets=($(echo "$files_changed" | xargs dirname | sed -nr "s|bitnami/([^/]*)/.*|\1|p" | sort | uniq || true))
