@@ -27,10 +27,10 @@ jobs:
       - id: get-modified-files
         name: 'Get modified files'
         env:
-          BASE_SHA: "${{github.event.pull_request.base.sha }}"
-          HEAD_SHA: "${{github.event.pull_request.head.sha }}"
+          BASE_REF: "${{github.event.pull_request.base.ref }}"
+          HEAD_REF: "${{github.event.pull_request.head.ref }}"
         run: |
-          files_changed="$(git diff --name-only "$HEAD_SHA" $(git merge-base "$HEAD_SHA" "$BASE_SHA") | sort | uniq)"
+          files_changed="$(git diff --name-only "$HEAD_REF" $(git merge-base "$HEAD_REF" "$BASE_REF") | sort | uniq)"
           dockerfiles=()
           while read -r file_changed; do
             # Avoid removed files
